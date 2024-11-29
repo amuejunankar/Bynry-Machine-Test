@@ -287,14 +287,19 @@
       .delete-account-button:active {
         background-color: #009e84;
       }
+      .logo a {
+        text-decoration: none; /* Removes the underline */
+        color: inherit; /* Inherits the color of the parent element (the logo) */
+      }
     </style>
   </head>
   <body>
     <header>
       <div class="header-content">
         <div class="logo">
-          <i class="fas fa-fire"></i> Bynry Gas Utility
+          <a href="{% url 'index' %}"><i class="fas fa-fire"></i> Bynry Gas Utility</a>
         </div>
+
         <nav>
           <ul>
             <li>
@@ -308,6 +313,9 @@
             </li>
             <li>
               <a href="#my-account">My Account</a>
+            </li>
+            <li>
+              <a href="{% url 'logout' %}" class="logout-link">Logout</a>
             </li>
           </ul>
         </nav>
@@ -364,19 +372,25 @@
                                         {% if request.status == 'pending' %}
                         
                         
+                        
                         status-pending
+
 
 
                       {% elif request.status == 'in_progress' %}
                         
                         
+                        
                         status-in-progress
+
 
 
                       {% else %}
                         
                         
+                        
                         status-completed
+
 
 
                       {% endif %}">
