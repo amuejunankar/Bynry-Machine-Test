@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adar Gas Utility Services</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00e5ff;
+            --secondary-color: #1de9b6;
+            --background-dark: #121212;
+            --text-light: #e0e0e0;
+            --glass-opacity: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--background-dark);
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #121212, #1a1a2e);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphic Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            background: linear-gradient(to right, rgba(0, 229, 255, 0.2), rgba(29, 233, 182, 0.2));
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections with Glassmorphic Design */
+        main {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: scale(1.02);
+        }
+
+        /* Form Styling */
+        .glass-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            padding: 0.75rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+
+        .glass-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: var(--background-dark);
+            padding: 0.75rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .glass-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Request Tracker */
+        .request-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+
+        .request-table th {
+            background: rgba(0, 229, 255, 0.2);
+            color: var(--primary-color);
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .request-table td {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .request-status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .status-pending { background-color: #ffc107; color: #000; }
+        .status-in-progress { background-color: #17a2b8; color: #fff; }
+        .status-completed { background-color: #28a745; color: #fff; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-fire"></i> Adar Gas Utility
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#submit-request">Submit Request</a></li>
+                    <li><a href="#track-request">Track Request</a></li>
+                    <li><a href="#my-account">My Account</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home">
+            <h2>Welcome to Adar Gas Utility Services</h2>
+            <p>Experience seamless, intelligent utility management powered by cutting-edge technology.</p>
+        </section>
+
+        <section id="submit-request">
+            <h2>Submit a Service Request</h2>
+            <form class="glass-form">
+                <select class="glass-input" required>
+                    <option value="">Select Service Type</option>
+                    <option value="repair">Gas Leak Repair</option>
+                    <option value="installation">New Installation</option>
+                    <option value="maintenance">Maintenance</option>
+                </select>
+
+                <textarea class="glass-input" rows="4" placeholder="Describe your service request..." required></textarea>
+
+                <input type="file" class="glass-input" />
+
+                <button type="submit" class="glass-button">Submit Request</button>
+            </form>
+        </section>
+
+        <section id="track-request">
+            <h2>Track Your Service Requests</h2>
+            <table class="request-table">
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Submitted</th>
+                        <th>Resolved</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>Gas Leak Repair</td>
+                        <td><span class="request-status status-pending">Pending</span></td>
+                        <td>2024-11-25</td>
+                        <td>--</td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>New Installation</td>
+                        <td><span class="request-status status-in-progress">In Progress</span></td>
+                        <td>2024-11-20</td>
+                        <td>--</td>
+                    </tr>
+                    <tr>
+                        <td>003</td>
+                        <td>Maintenance</td>
+                        <td><span class="request-status status-completed">Completed</span></td>
+                        <td>2024-11-15</td>
+                        <td>2024-11-18</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="my-account">
+            <h2>My Account</h2>
+            <div>
+                <p><strong>Name:</strong> John Doe</p>
+                <p><strong>Email:</strong> johndoe@example.com</p>
+                <p><strong>Phone:</strong> +123456789</p>
+                <p><strong>Address:</strong> 123 Main Street, City, Country</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
