@@ -1,287 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adar Gas Utility Services</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bynry Gas Utility Services</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
     <style>
-        :root {
-            --primary-color: #00e5ff;
-            --secondary-color: #1de9b6;
-            --background-dark: #121212;
-            --text-light: #e0e0e0;
-            --glass-opacity: rgba(255, 255, 255, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary-color) var(--background-dark);
-        }
-
-        body {
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #121212, #1a1a2e);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Glassmorphic Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            backdrop-filter: blur(10px);
-            background: linear-gradient(to right, rgba(0, 229, 255, 0.2), rgba(29, 233, 182, 0.2));
-            z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
+      :root {
+        --primary-color: #00e5ff;
+        --secondary-color: #1de9b6;
+        --background-dark: #121212;
+        --text-light: #e0e0e0;
+        --glass-opacity: rgba(255, 255, 255, 0.1);
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-color) var(--background-dark);
+      }
+      
+      body {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #121212, #1a1a2e);
+        color: var(--text-light);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      
+      html {
+        scroll-padding-top: 100px; /* Adjusts spacing for navbar */
+      }
+      
+      /* Glassmorphic Header */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        backdrop-filter: blur(10px);
+        background: linear-gradient(to right, rgba(0, 229, 255, 0.2), rgba(29, 233, 182, 0.2));
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+      }
+      
+      .logo {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+      }
+      
+      .logo i {
+        margin-right: 10px;
+        color: var(--secondary-color);
+      }
+      
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+      }
+      
+      nav ul li a {
+        text-decoration: none;
+        color: var(--text-light);
+        transition: all 0.3s ease;
+        position: relative;
+      }
+      
+      nav ul li a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--primary-color);
+        transition: width 0.3s;
+      }
+      
+      nav ul li a:hover::after {
+        width: 100%;
+      }
+      
+      /* Sections with Glassmorphic Design */
+      main {
+        max-width: 1200px;
+        margin: 80px auto 0;
+        padding: 2rem;
+      }
+      
+      section {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: transform 0.4s ease, background 0.3s ease;
+        will-change: transform, background;
+      }
+      
+      section:hover {
+        background: rgba(255, 255, 255, 0.085);
+      }
+      
+      /* Form Styling */
+      .glass-form {
+        display: grid;
+        gap: 1rem;
+      }
+      
+      .glass-input {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.6);
+        color: var(--text-light);
+        padding: 0.75rem;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+      
+      .glass-input:focus {
+        background: rgba(0, 0, 0, 0.8);
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+      }
+      
+      select.glass-input {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.05); /* Dark background for unselected state */
+        color: var(--text-light);
+        padding: 0.75rem;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+      
+      .glass-input:hover {
+        background: rgba(0, 0, 0, 0.7);
+      }
+      
+      /* File Upload Styling */
+      input[type='file'].glass-input {
+        display: none;
+      }
+      
+      select.glass-input:focus {
+        background: rgba(255, 255, 255, 0.1); /* Slightly brighter background for focus */
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+      }
+      .glass-input option {
+        background: rgba(0, 0, 0, 0.8);
+        color: var(--text-light);
+      }
+      
+      label.upload-label {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--text-light);
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        font-size: 1rem;
+        cursor: pointer;
+        text-align: center;
+        transition: background 0.3s ease, transform 0.3s ease;
+      }
+      
+      label.upload-label:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: scale(1.05);
+      }
+      
+      .upload-info {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--text-light);
+      }
+      
+      /* Glass Button */
+      .glass-button {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border: none;
+        color: var(--background-dark);
+        padding: 0.75rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      
+      .glass-button:hover {
+        background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); /* Reverse colors */
+      }
+      
+      /* Request Tracker Table */
+      .request-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+      }
+      
+      .request-table th {
+        background: rgba(0, 229, 255, 0.2);
+        color: var(--primary-color);
+        padding: 1rem;
+        text-align: left;
+      }
+      
+      .request-table td {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .request-status {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+      }
+      
+      .status-pending {
+        background-color: #ffc107;
+        color: #000;
+      }
+      .status-in-progress {
+        background-color: #17a2b8;
+        color: #fff;
+      }
+      .status-completed {
+        background-color: #28a745;
+        color: #fff;
+      }
+      
+      /* Responsive Design */
+      @media (max-width: 768px) {
         .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
+          flex-direction: column;
+          text-align: center;
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .logo i {
-            margin-right: 10px;
-            color: var(--secondary-color);
-        }
-
+      
         nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
+          flex-direction: column;
+          align-items: center;
         }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-light);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width 0.3s;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        /* Sections with Glassmorphic Design */
-        main {
-            max-width: 1200px;
-            margin: 80px auto 0;
-            padding: 2rem;
-        }
-
-        section {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-        }
-
-        section:hover {
-            transform: scale(1.02);
-        }
-
-        /* Form Styling */
-        .glass-form {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .glass-input {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-light);
-            padding: 0.75rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .glass-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-        }
-
-        .glass-button {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            color: var(--background-dark);
-            padding: 0.75rem;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .glass-button:hover {
-            transform: scale(1.05);
-        }
-
-        /* Request Tracker */
-        .request-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 10px;
-        }
-
-        .request-table th {
-            background: rgba(0, 229, 255, 0.2);
-            color: var(--primary-color);
-            padding: 1rem;
-            text-align: left;
-        }
-
-        .request-table td {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .request-status {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-
-        .status-pending { background-color: #ffc107; color: #000; }
-        .status-in-progress { background-color: #17a2b8; color: #fff; }
-        .status-completed { background-color: #28a745; color: #fff; }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
+      }
+      
+      .delete-account-button {
+        padding: 14px 14px;
+        border-radius: 12px;
+        background-color: #1de9b6;
+        border: none;
+        color: #000;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      
+      .delete-account-button:hover {
+        background-color: #00cba0;
+      }
+      
+      .delete-account-button:active {
+        background-color: #009e84;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="header-content">
-            <div class="logo">
-                <i class="fas fa-fire"></i> Adar Gas Utility
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#submit-request">Submit Request</a></li>
-                    <li><a href="#track-request">Track Request</a></li>
-                    <li><a href="#my-account">My Account</a></li>
-                </ul>
-            </nav>
+      <div class="header-content">
+        <div class="logo">
+          <i class="fas fa-fire"></i> Bynry Gas Utility
         </div>
+        <nav>
+          <ul>
+            <li>
+              <a href="#home">Home</a>
+            </li>
+            <li>
+              <a href="#submit-request">Submit Request</a>
+            </li>
+            <li>
+              <a href="#track-request">Track Request</a>
+            </li>
+            <li>
+              <a href="#my-account">My Account</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main>
-        <section id="home">
-            <h2>Welcome to Adar Gas Utility Services</h2>
-            <p>Experience seamless, intelligent utility management powered by cutting-edge technology.</p>
-        </section>
+      <section id="home">
+        <h2>Welcome to Bynry Gas Utility Services</h2>
+        <p>Experience seamless, intelligent utility management powered by cutting-edge technology.</p>
+      </section>
 
-        <section id="submit-request">
-            <h2>Submit a Service Request</h2>
-            <form class="glass-form">
-                <select class="glass-input" required>
-                    <option value="">Select Service Type</option>
-                    <option value="repair">Gas Leak Repair</option>
-                    <option value="installation">New Installation</option>
-                    <option value="maintenance">Maintenance</option>
-                </select>
+      <section id="submit-request">
+        <h2>Submit a Service Request</h2>
+        <form class="glass-form" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <select name="service_type" class="glass-input" required>
+            <option value="">Select Service Type</option>
+            <option value="repair">Gas Leak Repair</option>
+            <option value="installation">New Installation</option>
+            <option value="maintenance">Maintenance</option>
+          </select>
 
-                <textarea class="glass-input" rows="4" placeholder="Describe your service request..." required></textarea>
+          <textarea name="description" class="glass-input" rows="4" placeholder="Describe your service request..." required></textarea>
 
-                <input type="file" class="glass-input" />
+          <input type="file" id="file-upload" name="file" class="glass-input" />
+          <label for="file-upload" class="upload-label">Upload File</label>
+          <span class="upload-info">No file selected</span>
 
-                <button type="submit" class="glass-button">Submit Request</button>
-            </form>
-        </section>
+          <button type="submit" class="glass-button">Submit Request</button>
+        </form>
+      </section>
 
-        <section id="track-request">
-            <h2>Track Your Service Requests</h2>
-            <table class="request-table">
-                <thead>
-                    <tr>
-                        <th>Request ID</th>
-                        <th>Type</th>
-                        <th>Status</th>
-                        <th>Submitted</th>
-                        <th>Resolved</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>001</td>
-                        <td>Gas Leak Repair</td>
-                        <td><span class="request-status status-pending">Pending</span></td>
-                        <td>2024-11-25</td>
-                        <td>--</td>
-                    </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>New Installation</td>
-                        <td><span class="request-status status-in-progress">In Progress</span></td>
-                        <td>2024-11-20</td>
-                        <td>--</td>
-                    </tr>
-                    <tr>
-                        <td>003</td>
-                        <td>Maintenance</td>
-                        <td><span class="request-status status-completed">Completed</span></td>
-                        <td>2024-11-15</td>
-                        <td>2024-11-18</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+      <section id="track-request">
+        <h2>Track Your Service Requests</h2>
+        {% if service_requests.exists %}
+          <table class="request-table">
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Submitted</th>
+                <th>Resolved</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for request in service_requests %}
+                <tr>
+                  <td>{{ request.id }}</td>
+                  <td>{{ request.get_service_type_display }}</td>
+                  <td>
+                    <span class="request-status 
+                                        {% if request.status == 'pending' %}
+                        
+                        
+                        status-pending
 
-        <section id="my-account">
-            <h2>My Account</h2>
-            <div>
-                <p><strong>Name:</strong> John Doe</p>
-                <p><strong>Email:</strong> johndoe@example.com</p>
-                <p><strong>Phone:</strong> +123456789</p>
-                <p><strong>Address:</strong> 123 Main Street, City, Country</p>
-            </div>
-        </section>
+
+                      {% elif request.status == 'in_progress' %}
+                        
+                        
+                        status-in-progress
+
+
+                      {% else %}
+                        
+                        
+                        status-completed
+
+
+                      {% endif %}">
+                      {{ request.get_status_display }}
+                    </span>
+                  </td>
+                  <td>{{ request.submitted_at|date:'Y-m-d H:i' }}</td>
+                  <td>
+                    {% if request.resolved_at %}
+                      {{ request.resolved_at|date:'Y-m-d H:i' }}
+                    {% else %}
+                      --
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>No service requests found.</p>
+        {% endif %}
+      </section>
+
+      <section id="my-account">
+        <h2>My Account</h2>
+        <div>
+          <p>
+            <strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}
+          </p>
+          <p>
+            <strong>Username:</strong> {{ user.username }}
+          </p>
+          <p>
+            <strong>Email:</strong> {{ user.email }}
+          </p>
+        </div>
+        <br />
+        <button class="delete-account-button" onclick="confirmDeletion()">Delete Account</button>
+      </section>
     </main>
-</body>
+  </body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const fileInput = document.getElementById('file-upload')
+      const uploadInfo = document.querySelector('.upload-info')
+    
+      fileInput.addEventListener('change', function (event) {
+        const file = event.target.files[0]
+        if (file) {
+          uploadInfo.textContent = file.name // Display the selected file name
+        } else {
+          uploadInfo.textContent = 'No file selected'
+        }
+      })
+    })
+    
+    function confirmDeletion() {
+      if (confirm('Are you sure you want to delete your account?')) {
+        alert('Account deleted successfully.')
+      }
+    }
+    
+    function confirmDeletion() {
+      if (confirm('Are you sure you want to delete your account?')) {
+        alert('Account deleted successfully.')
+      }
+    }
+  </script>
 </html>
